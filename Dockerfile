@@ -22,6 +22,8 @@ RUN apt-get update \
                        libxml2-dev \
                        libxslt1-dev \
                        libffi-dev \
+                       libsqlite3-dev \
+                       libreadline-dev \
    && apt-get autoremove \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*

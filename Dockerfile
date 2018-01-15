@@ -48,6 +48,6 @@ RUN crontab cron.conf
 RUN rm -f Python*
 
 CMD ['scrapyd' , '-D FOREGROUND']
-WORKDIR ./news_scraper
-RUN scrapy-deploy
+WORKDIR /root/news_crawler/news_crawler
+RUN scrapyd-deploy
 

@@ -32,7 +32,7 @@ RUN tar xzf Python-$DOCKER_PYTHON_VERSION.tgz
 WORKDIR ./Python-$DOCKER_PYTHON_VERSION
 RUN ./configure --with-threads --enable-optimizations
 RUN make install
-
+RUN pip3 install --upgrade pip && pip3 list --outdated --format columns | awk 'NR>2{print $1}' | xargs pip3 install --upgrade
 # pipインストール(最新版)
 # RUN wget https://bootstrap.pypa.io/get-pip.py
 # RUN python3 get-pip.py
@@ -40,8 +40,7 @@ RUN make install
 WORKDIR /root
 RUN git clone https://github.com/naronA/news_crawler news_crawler
 
-WORKDIR ./news_scraper
-RUN pip3 install --upgrade pip && pip3 list --outdated --format columns | awk 'NR>2{print $1}' | xargs pip3 install --upgrade
+WORKDIR /root/news_crawler
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client
 RUN crontab cron.conf
 

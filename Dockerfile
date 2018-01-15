@@ -3,25 +3,25 @@ MAINTAINER naronA
 
 ENV DOCKER_PYTHON_VERSION 3.5.4
 
-RUN apt update && apt upgrade && \
-    apt install -y git \
-                   curl \
-                   wget \
-                   cron \
-                   build-essential \
-                   make \
-                   zlib1g-dev \
-                   libssl-dev \
-                   libbz2-dev \
-                   xz-utils \
-                   file mecab \
-                   libmecab-dev \
-                   mecab-ipadic \
-                   mecab-ipadic-utf8 \
-                   libxml2-dev \
-                   libxslt1-dev \
-                   libffi-dev && \
-   apt clean
+RUN apt-get update && apt-get upgrade && \
+    apt-get install -y git \
+                       curl \
+                       wget \
+                       cron \
+                       build-essential \
+                       make \
+                       zlib1g-dev \
+                       libssl-dev \
+                       libbz2-dev \
+                       xz-utils \
+                       file mecab \
+                       libmecab-dev \
+                       mecab-ipadic \
+                       mecab-ipadic-utf8 \
+                       libxml2-dev \
+                       libxslt1-dev \
+                       libffi-dev && \
+   apt-get clean
 
 # pythonのインストール
 WORKDIR /root

@@ -44,10 +44,12 @@ WORKDIR /root/news_crawler
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client
 RUN crontab cron.conf
 
-# Cleaning
 
-CMD ['scrapyd' , '-D FOREGROUND']
+WORKDIR /root
+CMD ['scrapyd']
+
 WORKDIR /root/news_crawler/news_crawler
 RUN scrapyd-deploy
 
+# Cleaning
 RUN rm -f /root/Python* /root/news_crawler

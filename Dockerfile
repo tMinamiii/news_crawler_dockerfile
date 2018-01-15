@@ -43,6 +43,7 @@ RUN git clone https://github.com/naronA/news_crawler news_crawler
 WORKDIR /root/news_crawler
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client
 RUN crontab cron.conf
+RUN cp -rf etc/scrapyd /etc
 
 
 WORKDIR /root

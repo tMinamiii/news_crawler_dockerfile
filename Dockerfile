@@ -52,17 +52,19 @@ WORKDIR /root
 RUN git clone https://github.com/naronA/news_crawler news_crawler
 
 WORKDIR /root/news_crawler
+RUN git pull
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client
 RUN crontab cron.conf
 RUN cp -rf scrapyd.conf /root/scrapyd.conf
 
-WORKDIR /root
-CMD ['scrapyd', '--pidfile=']
+RUN cd /root && scrapyd & sleep 10s \¬
+    && cd /root/news_crawler/news_crawler \¬
+    && scrapyd-deploy \¬
+    && curl http://localhost:46800/listprojects.json¬
 
-WORKDIR /root/news_crawler/news_crawler
-RUN scrapyd-deploy
-
-WORKDIR /
 # Cleaning
 RUN rm -f /root/Python* /root/news_crawler
 EXPOSE 46800
+
+WORKDIR /root
+CMD ['scrapyd', '--pidfile=']

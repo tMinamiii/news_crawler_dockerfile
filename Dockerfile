@@ -63,7 +63,7 @@ RUN cd /root \
     && curl http://localhost:46800/listprojects.json
 
 # Cleaning
-RUN rm -f /root/Python* /root/news_crawler
+RUN rm -rf /root/Python* /root/news_crawler
 EXPOSE 46800
 
 WORKDIR /root

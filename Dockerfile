@@ -67,4 +67,4 @@ RUN rm -rf /root/Python* /root/news_crawler
 EXPOSE 46800
 
 WORKDIR /root
-CMD ['/usr/local/bin/scrapyd', '--pidfile=']
+CMD ["/usr/local/bin/scrapyd", "--pidfile="]

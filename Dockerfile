@@ -44,18 +44,18 @@ RUN ./configure --with-threads --enable-optimizations \
        | awk 'NR>2{print $1}' \
        | xargs pip3 install --upgrade
 
-# pipインストール(最新版)
-# RUN wget https://bootstrap.pypa.io/get-pip.py
-# RUN python3 get-pip.py
 
+# news_crawlerの取得
 WORKDIR /root
 RUN git clone https://github.com/naronA/news_crawler news_crawler
 
+# news_crawlerの設定
 WORKDIR /root/news_crawler
-RUN pip3 install -r requirements.txt scrapyd scrapyd-client
-RUN crontab cron.conf
-RUN cp -rf scrapyd.conf /root/scrapyd.conf
+RUN pip3 install -r requirements.txt scrapyd scrapyd-client \
+    && crontab cron.conf \
+    && cp -rf scrapyd.conf /root/scrapyd.conf
 
+# ScrapydへのクローラープロジェクトDeploy
 RUN cd /root \
     && scrapyd & sleep 10s \
     && cd /root/news_crawler/news_crawler \

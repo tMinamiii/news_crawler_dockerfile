@@ -46,9 +46,15 @@ RUN ./configure --with-threads --enable-optimizations \
        | xargs pip3 install --upgrade
 
 
+
 # news_crawlerの取得
 WORKDIR /root
-RUN git clone https://github.com/naronA/news_crawler news_crawler
+RUN git clone https://github.com/naronA/news_crawler news_crawler \
+    && wget ://www.dropbox.com/s/gfr8mzpk1mq62ee/mecab-ipadic-neologd.tar.gz \
+    && tar xzf mecab-ipadic-neologd.tar.gz \
+    && mkdir -p /usr/lib/mecab/dic \
+    && mv mecab-ipadic-neologd /usr/lib/mecab/dic
+
 
 # news_crawlerの設定
 WORKDIR /root/news_crawler

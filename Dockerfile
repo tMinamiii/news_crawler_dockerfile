@@ -25,8 +25,6 @@ RUN apt-get update \
                        libsqlite3-dev \
                        libreadline-dev \
                        less \
-                       vi \
-                       tail \
    && apt-get autoremove \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*

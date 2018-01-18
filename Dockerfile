@@ -24,7 +24,6 @@ RUN apt-get update \
                        libffi-dev \
                        libsqlite3-dev \
                        libreadline-dev \
-                       avahi-utils \
    && apt-get autoremove \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*

@@ -51,7 +51,7 @@ RUN git clone https://github.com/naronA/news_crawler news_crawler \
     && wget https://www.dropbox.com/s/gfr8mzpk1mq62ee/mecab-ipadic-neologd.tar.gz \
     && tar xzf mecab-ipadic-neologd.tar.gz \
     && mkdir -p /usr/lib/mecab/dic \
-    && mv mecab-ipadic-neologd /usr/lib/mecab/dic
+    && mv mecab-ipadic-neologd /usr/lib/mecab/dic \
     && rm mecab-ipadic-neologd.tar.gz
 
 # news_crawlerの設定

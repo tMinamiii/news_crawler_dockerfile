@@ -3,6 +3,8 @@ MAINTAINER naronA
 
 ENV DOCKER_PYTHON_VERSION 3.5.4
 
+
+RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN apt-get update \
     && apt-get upgrade \
     && apt-get install -y git \
@@ -57,12 +59,13 @@ RUN git clone https://github.com/naronA/news_crawler news_crawler \
 # news_crawlerの設定
 WORKDIR /root/news_crawler
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client \
-    && crontab cron.conf \
+    && cp cron.conf /etc/cron.d/scrapy-cron \
+    && chmod 0644 /etc/cron.d/scrapy-cron \
     && cp -rf scrapyd.conf /root/scrapyd.conf
 
 # ScrapydへのクローラープロジェクトDeploy
 RUN cd /root \
-    && scrapyd & sleep 10s \
+    && scrapyd & sleep 20s \
     && cd /root/news_crawler/news_crawler \
     && scrapyd-deploy \
     && curl http://localhost:46800/listprojects.json
@@ -72,4 +75,4 @@ RUN rm -rf /root/Python* /root/news_crawler
 EXPOSE 46800
 
 WORKDIR /root
-CMD ["/usr/local/bin/scrapyd", "--pidfile="]
+CMD ["cron" "-f" "&&" "/usr/local/bin/scrapyd", "--pidfile="]

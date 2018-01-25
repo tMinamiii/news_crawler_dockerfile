@@ -59,8 +59,8 @@ RUN git clone https://github.com/naronA/news_crawler news_crawler \
 # news_crawlerの設定
 WORKDIR /root/news_crawler
 RUN pip3 install -r requirements.txt scrapyd scrapyd-client \
-    && cp cron.conf /etc/cron.d/scrapy-cron \
-    && chmod 0644 /etc/cron.d/scrapy-cron \
+    && crontab ./cron.conf \
+    && service cron restart \
     && cp -rf scrapyd.conf /root/scrapyd.conf
 
 # ScrapydへのクローラープロジェクトDeploy
